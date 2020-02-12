@@ -1,0 +1,5 @@
+Medical Context of Coding Terms
+
+pathology 病机 e.g. "spleen deficiency 脾虚"
+symptom 症状 e.g. "cough 咳嗽"
+policy 治法 e.g. "nourish spleen Yang 补脾阳"
