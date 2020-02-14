@@ -25,7 +25,7 @@ func createAuthor(w http.ResponseWriter, r *http.Request) {
 	var authorName string = author.Name
 	res := viewmodel.JsonRes{}
 
-	w.Header().Set("Content-Type", "application/json")
+	
 
 	if authorName == `` {
 		log.Print(`authorName is empty string! Fatal.`)
@@ -64,7 +64,7 @@ func createSource(w http.ResponseWriter, r *http.Request) {
 	}
 
 	res := viewmodel.JsonRes{}
-	w.Header().Set("Content-Type", "application/json")
+	
 
 	if source.AuthorId == 0 || source.LanguageId == 0 {
 		res.Msg = `Author & Language is needed.`
@@ -101,7 +101,7 @@ func createDisease(w http.ResponseWriter, r *http.Request) {
 	}
 
 	res := viewmodel.JsonRes{}
-	w.Header().Set("Content-Type", "application/json")
+	
 
 	if disease.SourceId == 0 {
 		res.Msg = `Book reference is needed.`
@@ -142,7 +142,7 @@ func createRecipe(w http.ResponseWriter, r *http.Request) {
 	}
 
 	res := viewmodel.JsonRes{}
-	w.Header().Set("Content-Type", "application/json")
+	
 
 	if recipe.SourceId == 0 {
 		recipe.SourceId=config.NoSourceId
@@ -176,7 +176,7 @@ func createHerb(w http.ResponseWriter, r *http.Request) {
 	}
 
 	res := viewmodel.JsonRes{}
-	w.Header().Set("Content-Type", "application/json")
+	
 
 	if herb.Name == `` && herb.Namezh==`` {
 		res.Msg=`Herb: a name in either language needed.`
@@ -213,7 +213,7 @@ func createRecipeHerb(w http.ResponseWriter, r *http.Request) {
 	}
 
 	res := viewmodel.JsonRes{}
-	w.Header().Set("Content-Type", "application/json")
+	
 
 	if rh.RecipeId == 0 || rh.HerbId == 0 {
 		res.Msg=`Recipe AND Herb must already exist in database.`
@@ -250,7 +250,7 @@ func createPolicy(w http.ResponseWriter, r *http.Request) {
 	}
 
 	res := viewmodel.JsonRes{}
-	w.Header().Set("Content-Type", "application/json")
+	
 
 	if policy.TreatmentVerbId == 0 {
 		res.Msg=`Treatment verb must already exist`
@@ -295,7 +295,7 @@ func createDiseasePolicy(w http.ResponseWriter, r *http.Request) {
 	}
 
 	res := viewmodel.JsonRes{}
-	w.Header().Set("Content-Type", "application/json")
+	
 
 	if dp.DiseaseId == 0 || dp.PolicyId==0 {
 		res.Msg=`Disease AND Policy must both already exist`
@@ -332,7 +332,7 @@ func createOrganSymptom(w http.ResponseWriter, r *http.Request) {
 	}
 
 	res := viewmodel.JsonRes{}
-	w.Header().Set("Content-Type", "application/json")
+	
 
 	if os.SymptomId==0 {
 		res.Msg=`Symptom id must already exist`
@@ -373,7 +373,7 @@ func createDiseaseOrgansymptom(w http.ResponseWriter, r *http.Request) {
 	}
 
 	res := viewmodel.JsonRes{}
-	w.Header().Set("Content-Type", "application/json")
+	
 
 	if ds.OrgansymptomId==0 || ds.DiseaseId==0 {
 		res.Msg=`Disease id & Organ-symptom id must both already exist`

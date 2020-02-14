@@ -11,4 +11,4 @@ const page = (state = false, action) => {
 }
 
 
-export default page
+export default page;

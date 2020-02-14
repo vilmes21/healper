@@ -1,1 +1,5 @@
 export const GOTO = "GOTO"
+export const ALL_SOURCES = "ALL_SOURCES"
+export const ADD_DISE="ADD_DISE"
+export const ALL_ORGANS="ALL_ORGANS"
+export const ALL_SYMP_ADJS="ALL_SYMP_ADJS"

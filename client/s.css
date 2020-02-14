@@ -1,0 +1,28 @@
+.bt {
+    padding: 5px 25px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 18px;
+}
+
+.ipt {
+    padding: 3px 7px;
+    font-size: 24px;
+}
+
+.sectitle{
+    font-weight: bold;
+    font-size: 30px;
+}
+.opt{
+    font-size: 25px;
+    padding: 10px;
+    cursor: pointer;
+}
+.opt:hover{
+    background-color: lightgrey;
+
+}
+/* .greybg{
+    background-color: lightgrey;
+} */
