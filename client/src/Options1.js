@@ -3,7 +3,7 @@ import Option1 from "./Option1";
 
 class Options1 extends React.Component {
   render(){
-      const {options, appendCandidate}=this.props;
+      const {options, appendCandidate,cartPreBuilt}=this.props;
       if (options.length === 0){
           return <div>0 match</div>
       }
@@ -12,16 +12,15 @@ class Options1 extends React.Component {
           <div>
               {
                   options.map(x => {
-                      return <Option1 key={x.id} option={x}
-                      appendCandidate={appendCandidate}/>
+                      return <Option1 key={`${x.frontendType}-${x.id}`} option={x}
+                      appendCandidate={appendCandidate}
+                      cartPreBuilt={cartPreBuilt}
+                      />
                   })
               }
           </div>
       )
-      
-    return <div>
-      page 3
-    </div>
+    
   }
 }
 

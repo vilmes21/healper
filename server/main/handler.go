@@ -4,11 +4,14 @@ import (
 	"encoding/json"
 	"log"
 	"net/http"
+
 	// "../db1"
-	"../model"
-	"../config"
-	"../viewmodel"
 	"fmt"
+
+	"../config"
+	"../model"
+	"../viewmodel"
+
 	// "dbbase/sql"
 	// "github.com/gorilla/mux"
 	_ "github.com/lib/pq"
@@ -24,8 +27,6 @@ func createAuthor(w http.ResponseWriter, r *http.Request) {
 
 	var authorName string = author.Name
 	res := viewmodel.JsonRes{}
-
-	
 
 	if authorName == `` {
 		log.Print(`authorName is empty string! Fatal.`)
@@ -64,7 +65,6 @@ func createSource(w http.ResponseWriter, r *http.Request) {
 	}
 
 	res := viewmodel.JsonRes{}
-	
 
 	if source.AuthorId == 0 || source.LanguageId == 0 {
 		res.Msg = `Author & Language is needed.`
@@ -78,43 +78,6 @@ func createSource(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		fmt.Printf("insert source err: %v", err)
 		res.Msg = `insert source err. ` + err.Error()
-
-		jsonBytes, _ := json.Marshal(res)
-		w.Write(jsonBytes)
-		return
-	}
-
-	res.Ok = true
-	jsonBytes, _ := json.Marshal(res)
-	w.Write(jsonBytes)
-}
-
-func createDisease(w http.ResponseWriter, r *http.Request) {
-	decoder := json.NewDecoder(r.Body)
-	var disease model.Disease
-	err := decoder.Decode(&disease)
-
-	fmt.Printf("disease is: %+v\n", disease)
-
-	if err != nil {
-		panic(err)
-	}
-
-	res := viewmodel.JsonRes{}
-	
-
-	if disease.SourceId == 0 {
-		res.Msg = `Book reference is needed.`
-		jsonBytes, _ := json.Marshal(res)
-		w.Write(jsonBytes)
-		return
-	}
-
-	err = db.QueryRow("INSERT INTO disease (name, name_zh, source_id, pinyin) values ($1, $2, $3,$4) RETURNING id", disease.Name, disease.Namezh, disease.SourceId, disease.Pinyin).Scan(&res.Id)
-
-	if err != nil {
-		fmt.Printf("insert disease err: %v", err)
-		res.Msg = `insert disease err. ` + err.Error()
 
 		jsonBytes, _ := json.Marshal(res)
 		w.Write(jsonBytes)
@@ -142,10 +105,9 @@ func createRecipe(w http.ResponseWriter, r *http.Request) {
 	}
 
 	res := viewmodel.JsonRes{}
-	
 
 	if recipe.SourceId == 0 {
-		recipe.SourceId=config.NoSourceId
+		recipe.SourceId = config.NoSourceId
 	}
 
 	err = db.QueryRow("INSERT INTO recipe (name, name_zh, source_id, pinyin) values ($1, $2, $3,$4) RETURNING id", recipe.Name, recipe.Namezh, recipe.SourceId, recipe.Pinyin).Scan(&res.Id)
@@ -176,10 +138,9 @@ func createHerb(w http.ResponseWriter, r *http.Request) {
 	}
 
 	res := viewmodel.JsonRes{}
-	
 
-	if herb.Name == `` && herb.Namezh==`` {
-		res.Msg=`Herb: a name in either language needed.`
+	if herb.Name == `` && herb.Namezh == `` {
+		res.Msg = `Herb: a name in either language needed.`
 		jsonBytes, _ := json.Marshal(res)
 		w.Write(jsonBytes)
 		return
@@ -213,10 +174,9 @@ func createRecipeHerb(w http.ResponseWriter, r *http.Request) {
 	}
 
 	res := viewmodel.JsonRes{}
-	
 
 	if rh.RecipeId == 0 || rh.HerbId == 0 {
-		res.Msg=`Recipe AND Herb must already exist in database.`
+		res.Msg = `Recipe AND Herb must already exist in database.`
 		jsonBytes, _ := json.Marshal(res)
 		w.Write(jsonBytes)
 		return
@@ -250,21 +210,20 @@ func createPolicy(w http.ResponseWriter, r *http.Request) {
 	}
 
 	res := viewmodel.JsonRes{}
-	
 
 	if policy.TreatmentVerbId == 0 {
-		res.Msg=`Treatment verb must already exist`
+		res.Msg = `Treatment verb must already exist`
 		jsonBytes, _ := json.Marshal(res)
 		w.Write(jsonBytes)
 		return
 	}
 
-	if policy.OrganId==0{
-		policy.OrganId=config.BlankOrganId
+	if policy.OrganId == 0 {
+		policy.OrganId = config.BlankOrganId
 	}
 
-	if policy.TcmOrganId==0{
-		policy.TcmOrganId=config.BlankOrganId
+	if policy.TcmOrganId == 0 {
+		policy.TcmOrganId = config.BlankOrganId
 	}
 
 	err = db.QueryRow("INSERT INTO policy (treatment_verb_id,organ_id, tcm_organ_id) values ($1, $2, $3) RETURNING id", policy.TreatmentVerbId, policy.OrganId, policy.TcmOrganId).Scan(&res.Id)
@@ -295,10 +254,9 @@ func createDiseasePolicy(w http.ResponseWriter, r *http.Request) {
 	}
 
 	res := viewmodel.JsonRes{}
-	
 
-	if dp.DiseaseId == 0 || dp.PolicyId==0 {
-		res.Msg=`Disease AND Policy must both already exist`
+	if dp.DiseaseId == 0 || dp.PolicyId == 0 {
+		res.Msg = `Disease AND Policy must both already exist`
 		jsonBytes, _ := json.Marshal(res)
 		w.Write(jsonBytes)
 		return
@@ -309,47 +267,6 @@ func createDiseasePolicy(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		fmt.Printf("insert dp err: %v", err)
 		res.Msg = `insert dp err. ` + err.Error()
-
-		jsonBytes, _ := json.Marshal(res)
-		w.Write(jsonBytes)
-		return
-	}
-
-	res.Ok = true
-	jsonBytes, _ := json.Marshal(res)
-	w.Write(jsonBytes)
-}
-
-func createOrganSymptom(w http.ResponseWriter, r *http.Request) {
-	decoder := json.NewDecoder(r.Body)
-	var os model.OrganSymptom
-	err := decoder.Decode(&os)
-
-	// fmt.Printf("os is: %+v\n", os)
-
-	if err != nil {
-		panic(err)
-	}
-
-	res := viewmodel.JsonRes{}
-	
-
-	if os.SymptomId==0 {
-		res.Msg=`Symptom id must already exist`
-		jsonBytes, _ := json.Marshal(res)
-		w.Write(jsonBytes)
-		return
-	}
-
-	if os.OrganId==0 {
-		os.OrganId=config.BlankOrganId
-	}
-
-	err = db.QueryRow("INSERT INTO organ_symptom (organ_id,symptom_id) values ($1, $2) RETURNING id", os.OrganId, os.SymptomId).Scan(&res.Id)
-
-	if err != nil {
-		fmt.Printf("insert os err: %v", err)
-		res.Msg = `insert os err. ` + err.Error()
 
 		jsonBytes, _ := json.Marshal(res)
 		w.Write(jsonBytes)
@@ -373,16 +290,15 @@ func createDiseaseOrgansymptom(w http.ResponseWriter, r *http.Request) {
 	}
 
 	res := viewmodel.JsonRes{}
-	
 
-	if ds.OrgansymptomId==0 || ds.DiseaseId==0 {
-		res.Msg=`Disease id & Organ-symptom id must both already exist`
+	if ds.OrgansymptomId == 0 || ds.DiseaseId == 0 {
+		res.Msg = `Disease id & Organ-symptom id must both already exist`
 		jsonBytes, _ := json.Marshal(res)
 		w.Write(jsonBytes)
 		return
 	}
 
-	_,err = db.Query("INSERT INTO disease_organsymptom (disease_id,organ_symptom_id) values ($1, $2)", ds.DiseaseId, ds.OrgansymptomId)
+	_, err = db.Query("INSERT INTO disease_organsymptom (disease_id,organ_symptom_id) values ($1, $2)", ds.DiseaseId, ds.OrgansymptomId)
 
 	if err != nil {
 		fmt.Printf("insert ds err: %v", err)

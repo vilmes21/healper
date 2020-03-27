@@ -8,7 +8,7 @@ import config from "./helper/config";
 
 class NewDisease extends React.Component {
     state = {
-        sourceId: ``,
+        sourceId: `3`,
         name: ``,
         pinyin: ``,
         namezh: ``
@@ -63,7 +63,7 @@ class NewDisease extends React.Component {
 
     componentDidMount = async() => {
         const d = await getAllSources();
-        console.log(`did m, d: `, d);
+        
         if (!d) 
             return;
         

@@ -1,4 +1,4 @@
-import {ADD_DISE} from './types'
+import {ADD_DISE, ADD_SYM_TO_DISE} from '../action/types'
 
 export const addDise = x => {
     return {
@@ -6,3 +6,11 @@ export const addDise = x => {
         payload: x
     }
 }
+
+export const addSym2Dise = x => {
+    return {
+        type: ADD_SYM_TO_DISE, 
+        payload: x
+    }
+}
+

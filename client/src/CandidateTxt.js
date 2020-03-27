@@ -4,7 +4,7 @@ class CandidateTxt extends React.Component {
     render() {
         const {objArr} = this.props;
         const arr = objArr.map(x => x.namezh);
-        return <div>
+        return <div className="fontsize7 greycolor">
             {arr.join("")}
         </div>
     }

@@ -1,3 +1,15 @@
+.inlineBloc {
+    display: inline-block;
+}
+
+.fontsize5 {
+    font-size: 25px;
+}
+
+.fontsize7 {
+    font-size: 35px;
+}
+
 .bt {
     padding: 5px 25px;
     border-radius: 5px;
@@ -23,6 +35,68 @@
     background-color: lightgrey;
 
 }
-/* .greybg{
-    background-color: lightgrey;
-} */
+
+.del1 {
+    margin-left: 15px;
+}
+
+.cartitem {
+    padding: 3px 5px;
+    background-color: lightblue;
+    border-radius: 5px;
+    margin-right: 5px;
+}
+
+.saveditem {
+    padding: 3px 5px;
+    background-color: rgb(194, 210, 216);
+    border-radius: 5px;
+    margin-right: 5px;
+}
+
+.pointercursor {
+    cursor: pointer;
+}
+
+.whitecolor {
+    color: white;
+}
+
+.greycolor {
+    color: grey;
+}
+
+.blackbg{
+    background-color: rgba(0,0,0,0.8);
+}
+.whitebg {
+    background-color: whitesmoke;
+}
+.modal1 {
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+}
+
+.modal2 {
+    margin: 50px;
+    min-height: 350px;
+}
+
+.fullHeight {
+    height: 100%;
+}
+
+.fullWidth{
+    width: 100%;
+}
+
+
+.absPos {
+    position: absolute;
+}
+
+.relativePos {
+    position: relative;
+}
